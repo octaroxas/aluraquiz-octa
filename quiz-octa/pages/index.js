@@ -4,6 +4,8 @@ import Widget from '../src/components/Widget';
 import QuizBackground from '../src/components/QuizBackground';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/gitHubCorner';
+import QuizLogo from '../src/components/QuizLogo';
+import Head from 'next/head';
 
 const theme = db.theme;
 
@@ -34,7 +36,11 @@ export const QuizContainer = styled.div`
 export default function Home() {
   return (
     <QuizBackground backgroundImage={db.fundo}>
+      <Head>
+        <title>NerdQuiz</title>
+      </Head>
       <QuizContainer>
+      <QuizLogo/>
       <Widget>
         <Widget.Header>
           <h1>
