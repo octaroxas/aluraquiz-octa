@@ -7,9 +7,13 @@ import db from '../db.json';
 
 import Widget from '../src/components/Widget';
 import QuizBackground from '../src/components/QuizBackground';
+import QuizContainer from '../src/components/QuizContainer';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/gitHubCorner';
 import QuizLogo from '../src/components/QuizLogo';
+import Input from '../src/components/Input';
+import Button from '../src/components/Button';
+import OutrosQuizes from '../src/components/OutrosQuizes';
 
 
 const theme = db.theme;
@@ -24,60 +28,6 @@ const BackgroundImage = styled.div`
   flex:1;
   background-size: cover;
   background-position: center;
-`;
-
-export const QuizContainer = styled.div`
-  width:100%;
-  max-width: 350px;
-  padding-top: 45px;
-  margin: auto 10%;
-  @media screem and (max-width: 500px) {
-    margin: auto;
-    padding: 15px;
-  }
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 40px;
-  background-color: #1C1814;
-  border: 2px solid ${db.theme.colors.primary};
-  border-radius: 7px;
-  padding-left:15px;
-
-  color: #fff;
-  
-  margin-top: 20px;
-  
-`;
-
-const Button = styled.button`
-
-  background-color: ${db.theme.colors.red};
-
-  width: 100%;
-  height: 40px;
-  border-radius: 7px;
-  border: transparent;
-
-  font-weight: bolder;
-
-  margin-top: 20px;
-  color:#fff;
-`;
-
-const OutrosQuizes = styled.div`
-  width: 100%;
-  padding: 10px;
-  margin-top:5px;
-  background-color: ${db.theme.colors.grey};
-  font-size:12px;
-  border-radius: 5px;
-
-  a {
-    color: white;
-    text-decoration: none;
-  }
 `;
 
 
@@ -117,17 +67,17 @@ export default function Home() {
           }}>
 
             <Input 
+              name="nomeDoUsuario"
+              value={name}
               placeholder="Qual seu nome ?" 
               // A cada vez que o conteúdo do input mudar isso erá refletir no conteúdo de 'name'
-              onChange={ function (infoEvento){
-                // Conceito de State
-                setName(infoEvento.target.value);
-                console.log(name);
-              }}
+              onChange={(infoEvento) => setName(infoEvento.target.value)}
             />
+
             <Button type="submit" disabled={name.length === 0}>
-              JOGAR {name}
+              {`JOGAR ${name}`}
             </Button>
+
           </form>
         </Widget.Content>
       </Widget>
