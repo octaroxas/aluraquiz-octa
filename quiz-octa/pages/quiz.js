@@ -13,7 +13,43 @@ import QuizLogo from '../src/components/QuizLogo';
 import Input from '../src/components/Input';
 import Button from '../src/components/Button';
 import QuizContainer from '../src/components/QuizContainer';
+import AlternativesForm from '../src/components/AlternativesForm';
 
+function WidgetResult({ results }) {
+
+    return (
+        <Widget>
+            <Widget.Header>
+                Resultado do Quiz
+            </Widget.Header>
+            <Widget.Content>
+                {/**pesquisar mais sobre o método reduce() */}
+                <p>
+                    Você acertou
+                    {' '} {/** adiciona um espaço entre as palavras */}
+                        {results.reduce((somatorioAtual, resultadoAtual) => {
+                            const isAcerto = resultadoAtual === true;
+                            if(isAcerto) {
+                                return somatorioAtual + 1;
+                            }
+                            return somatorioAtual;
+                        }, 0)} {/** o '0' é a inicialização do resultadoAtual */}
+                    {' '}
+                    perguntas!
+                </p>
+
+                <ul>
+                    {results.map((result, index) => (
+                        <li key={`result__${result}`}>
+                            #{index + 1} Resultado: 
+                            {result === true ? ' Acertou'  : ' Errou'} {/* se o item 'result' for true retorna 'Acertou', caso contrário 'Errou'  */}
+                        </li>
+                    ))}
+                </ul>
+            </Widget.Content>
+        </Widget>
+    );
+}
 
 function WidgetLoading() {
     return (
@@ -21,6 +57,16 @@ function WidgetLoading() {
             <Widget.Header>
                 Carregando...
             </Widget.Header>
+            <img
+                alt="Descrição"
+                style={{
+                    width: '100%',
+                    height: '150px',
+                    objectFit: 'cover'
+                }}                    
+                src= "https://media.giphy.com/media/3y0oCOkdKKRi0/giphy.gif"
+            >
+            </img>
             <Widget.Content>
                 As perguntas do Quiz estão sendo carregadas!
             </Widget.Content>
@@ -28,69 +74,85 @@ function WidgetLoading() {
     );
 }
 
-function QuestionWidget( { question, totalQuestion, questionIndex, onSubmit} ){
+function QuestionWidget( { question, totalQuestion, questionIndex, onSubmit, addResult} ){
     const questionId = `question__${questionIndex}`;
+    const [selectedAlternative, setSelectedAlternative] = React.useState(undefined);
+    const isCorrect = selectedAlternative === question.answer;
+    const [isQuestionSubmited, setIsQuestionSubmited] = React.useState(false);
+    const hasAlternativeSelected = selectedAlternative !== undefined;
     return (
         <Widget>
-        <Widget.Header>
-            {/* <BackLinkArrow href="/" /> */}
-            <h3>
-                {`Pergunta ${questionIndex + 1} de ${totalQuestion}`}
-            </h3>
-        </Widget.Header>
-
-        <img
-            alt="Descrição"
-            style={{
-                width: '100%',
-                height: '150px',
-                objectFit: 'cover'
-            }}                    
-            src= {question.image}
-        >
-        </img>
-
-        <Widget.Content>
-            <h1>
-                {question.title}
-            </h1>
-
-            <p>
-                {question.description}
-            </p>
-
-            <form
-                onSubmit={(infoDoEvento) => {
-                    infoDoEvento.preventDefault(); 
-                    onSubmit();
-                }}
+            <Widget.Header>
+                {/* <BackLinkArrow href="/" /> */}
+                <h3>
+                    {`Pergunta ${questionIndex + 1} de ${totalQuestion}`}
+                </h3>
+            </Widget.Header>
+            <img
+                alt="Descrição"
+                style={{
+                    width: '100%',
+                    height: '150px',
+                    objectFit: 'cover'
+                }}                    
+                src= {question.image}
             >
-                {question.alternatives.map((alternative, alternativeIndex) => { {/* O 'map' sempre retorna algo, seja um valor ou objeto */}
-                    const alternativeId = `alternative__${alternativeIndex}`;
-                    return (
-                        <Widget.Topic
-                        as="label"
-                            htmlFor={alternativeId}
-                        >
-                            <input 
-                                name={questionId}
-                                id={alternativeId}
-                                type="radio"
-                            />
-                            {alternative}
-                        </Widget.Topic>
-                    );
-                })}
-
-
-                {/* <pre> {JSON.stringfy(question, null, 4)}</pre> */} {/** debug no próprio componente, aparece na tela e não no console */}
-
-                <Button type='submit'>
-                    Confirmar
-                </Button>
-            </form>
-        </Widget.Content>
-    </Widget>
+            </img>
+            <Widget.Content>
+                <h1>
+                    {question.title}
+                </h1>
+                <p>
+                    {question.description}
+                </p>
+                <AlternativesForm
+                    onSubmit={(infoDoEvento) => {
+                        infoDoEvento.preventDefault(); 
+                        setIsQuestionSubmited(true);
+                        setTimeout(() => {
+                            addResult(isCorrect);
+                            onSubmit(); //Mudar estado -> Trocar a pergunta ou mostrar resultado final
+                            setIsQuestionSubmited(false);
+                            setSelectedAlternative(undefined);
+                        }, 2* 1000)
+                    }}
+                >
+                    {question.alternatives.map((alternative, alternativeIndex) => { /* O 'map' sempre retorna algo, seja um valor ou objeto */
+                        const alternativeId = `alternative__${alternativeIndex}`;
+                        const alternativeStatus = isCorrect ? 'SUCCESS': 'ERROR';
+                        const isSelected = selectedAlternative === alternativeIndex;
+                        return (
+                            <Widget.Topic
+                            as="label"
+                            key={alternativeId}
+                            htmlFor={alternativeId} /* faz um for com as alternativas */
+                            data-selected={isSelected}
+                            data-status={isQuestionSubmited && alternativeStatus}
+                            >
+                                <input 
+                                style={{display: 'none'}}
+                                    name={questionId}
+                                    id={alternativeId}
+                                    type="radio" //{/* input em formato de circulo */}
+                                    onChange={() => { 
+                                        setSelectedAlternative(alternativeIndex); 
+                                       {/** setHasAlternativeSelected(true); */}
+                                    }}
+                                />
+                                {alternative}
+                            </Widget.Topic>
+                        );
+                    })}
+                    {/* <pre> {JSON.stringfy(question, null, 4)}</pre> */}                 
+                    <Button type='submit' disabled={!hasAlternativeSelected}>
+                        Confirmar
+                    </Button>
+                    <p>selectedAlternative: {`${selectedAlternative}`}</p>
+                    {isQuestionSubmited && isCorrect && <p>Você acertou! </p>}
+                    {isQuestionSubmited && !isCorrect && <p>Você errou!  </p>}
+                </AlternativesForm>
+            </Widget.Content>
+        </Widget>
     );
 }
 
@@ -103,11 +165,19 @@ const screenStates = {
 function QuizPage(){
     //console.log('Perguntas criadas: ', db.questions);
 
+    const [results, setResults] = React.useState([]);
     const [screenState, setScreenState] = React.useState(screenStates.LOADING); {/**Hook */}
     const totalQuestion = db.questions.length;
     const [CurrentQuestion, setCurrentQuestion] = React.useState(0); {/**Hook */}
     const questionIndex = CurrentQuestion;
     const question = db.questions[questionIndex];
+
+    function addResult( result ) {
+        setResults([
+            ...results,  /* Pegue todos os results anteriores        */
+            result      /* E também o result passado como argumento */ 
+        ]);
+    }
 
     {/*Pesquisar mais sobre useEffect() */}
     React.useEffect(() => {
@@ -137,10 +207,11 @@ function QuizPage(){
                         totalQuestion={totalQuestion}
                         questionIndex={questionIndex}
                         onSubmit={handleSubmitQuiz}
+                        addResult={addResult}
                     /> 
                 )}
 
-                {screenState === screenStates.RESULT && ( <div>Voce acertou nenhuma, parabéns</div> )}
+                {screenState === screenStates.RESULT && ( <WidgetResult results={results} /> )}
             </QuizContainer>
         </QuizBackground>
     );
