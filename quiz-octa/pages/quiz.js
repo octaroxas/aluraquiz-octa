@@ -22,7 +22,7 @@ function WidgetLoading() {
                 Carregando...
             </Widget.Header>
             <Widget.Content>
-                Mensagem do Loading!
+                As perguntas do Quiz estão sendo carregadas!
             </Widget.Content>
         </Widget>
     );
@@ -65,7 +65,7 @@ function QuestionWidget( { question, totalQuestion, questionIndex, onSubmit} ){
                     onSubmit();
                 }}
             >
-                {question.alternatives.map((alternative, alternativeIndex) => {
+                {question.alternatives.map((alternative, alternativeIndex) => { {/* O 'map' sempre retorna algo, seja um valor ou objeto */}
                     const alternativeId = `alternative__${alternativeIndex}`;
                     return (
                         <Widget.Topic
@@ -83,14 +83,13 @@ function QuestionWidget( { question, totalQuestion, questionIndex, onSubmit} ){
                 })}
 
 
-                {/* <pre> {JSON.stringfy(question, null, 4)}</pre> */} {/** debug no próprio componente */}
+                {/* <pre> {JSON.stringfy(question, null, 4)}</pre> */} {/** debug no próprio componente, aparece na tela e não no console */}
 
-                <Button>
+                <Button type='submit'>
                     Confirmar
                 </Button>
             </form>
         </Widget.Content>
-
     </Widget>
     );
 }
@@ -102,7 +101,7 @@ const screenStates = {
 }
 
 function QuizPage(){
-    console.log('Perguntas criadas: ', db.questions);
+    //console.log('Perguntas criadas: ', db.questions);
 
     const [screenState, setScreenState] = React.useState(screenStates.LOADING); {/**Hook */}
     const totalQuestion = db.questions.length;
@@ -110,6 +109,7 @@ function QuizPage(){
     const questionIndex = CurrentQuestion;
     const question = db.questions[questionIndex];
 
+    {/*Pesquisar mais sobre useEffect() */}
     React.useEffect(() => {
         setTimeout(() => {
             setScreenState(screenStates.QUIZ);

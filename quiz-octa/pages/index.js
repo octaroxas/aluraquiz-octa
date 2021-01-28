@@ -55,7 +55,7 @@ export default function Home() {
             Teste seus conhecimentos e descubra se você é um <i>Nerd</i> de verdade!
           </p>
 
-          <form onSubmit={ function (infoEvento){
+          <form onSubmit={(infoEvento) => {
             // Previvine que a página execute o refress a cada submissão
             infoEvento.preventDefault();
             console.log('Submisão de nome!');
@@ -67,7 +67,7 @@ export default function Home() {
           }}>
 
             <Input 
-              name="nomeDoUsuario"
+              name="nomeDoUsuario" // propriedade para auxiliar acessibilidade (uso em leitores de tela)
               value={name}
               placeholder="Qual seu nome ?" 
               // A cada vez que o conteúdo do input mudar isso erá refletir no conteúdo de 'name'
