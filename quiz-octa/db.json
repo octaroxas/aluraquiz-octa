@@ -1,38 +1,84 @@
 {
   "bg": "https://i2.wp.com/css-tricks.com/wp-content/uploads/2017/06/css-is-awesome-scaled.jpg?resize=1536%2C1208&ssl=1",
   "fundo": "https://i.ibb.co/hy0T2BB/fundo-quiz.jpg",
+  "gifMizeravi":"https://gfycat.com/enchantingpresentfrogmouth",
+  "obrigado":"https://media.giphy.com/media/d68IdpvmAHohx5NMEV/giphy.gif",
   "title": "Quiz CSS da Alura",
   "description": "Teste os seus conhecimentos sobre CSS e vamos ver quantos layouts você vai deixar de quebrar",
   "questions": [
     {
-      "image": "https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif",
-      "title": "Como fazer um seletor por id via CSS?",
-      "description": "Essa é pra aquecer",
-      "answer": 2,
-      "alternatives": [
-        ".elemento",
-        "*elemento",
-        "#elemento",
-        "%elemento"
-      ]
+    "image": "https://media.giphy.com/media/T7Qx28nEdo9NK/giphy.gif",
+    "title": "Qual o nome da vila onde o Luffy nasceu?",
+    "description": "Se gosta de OP tem que saber haha",
+    "answer": 0,
+    "alternatives": [
+        "Vila Fusha",
+        "Vila Kokoiashi",
+        "Vila Ryuo",
+        "Water 7"
+        ]
     },
     {
-      "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
-      "title": "Como fazer um background gradiente com css?",
-      "description": "Faz tempo em haha",
-      "answer": 0,
+        "image": "https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif",
+        "title": "Como inicializamos uma variável do tipo inteiro na linguagem de programação C?",
+        "description": "Eita",
+        "answer": 1,
+        "alternatives": [
+            "ent nomeDaVariavel = 0",
+            "int nomeDaVariavel = 0",
+            "ont nomeDaVariavel = 0",
+            "if nomeDaVariavel = 0"
+            ]
+    },
+    {
+        "image": "https://media.giphy.com/media/J5jiSSrEkV3Kd8iOwb/giphy.gif",
+        "title": "Qual o nome do ator que interpretou o JOKER?",
+        "description": "- O que é engraçado?, - Você não entenderia. ",
+        "answer": 2,
+        "alternatives": [
+            "Roakin Phoenix",
+            "Jaquin Phoenix",
+            "Joaquin Phoenix",
+            "Joaquin Fenix"
+            ]
+    },
+    {
+      "image": "https://sm.ign.com/ign_pt/screenshot/default/blob_6qkr.jpg",
+      "title": "Qual o nome da série de jogos protagonizada por Kratos?",
+      "description": "AREES, I WILL HAVE MY REVENGE!",
+      "answer": 3,
       "alternatives": [
-         "background: linear-gradient(#e66465, #9198e5);",
-         "background: gradient(#e66465, #9198e5);"
-      ]
-    }
-  ],
-  "external": [
-    "https://pato-quiz-nextjs.theedouglasam.vercel.app/",
-    "https://aluraquiz-coffee.leonardot07.vercel.app/",
-    "http://hollow-knigth-quiz.lugusfe.vercel.app/",
-    "https://quiz-cavaleiro-zodiaco.vercel.app/"
-  ],
+          "O Bom de Guerra",
+          "Ghost of Tsushima",
+          "Good of War",
+          "God of War"
+          ]
+  },
+  {
+    "image": "https://media.giphy.com/media/NAcNfRrU6f2bC/giphy.gif",
+    "title": "Qual o nome da estrutura que comporta as peças de um computador de mesa (Desktop)",
+    "description": "Muito atendente de loja de informática erra essa kkk",
+    "answer": 0,
+    "alternatives": [
+        "Gabinete",
+        "CPU",
+        "Caixa Preta",
+        "Nenhuma das anteriores"
+        ]
+},
+{
+  "image": "https://media.giphy.com/media/mfhIlzn4UZb68/giphy.gif",
+  "title": "Qual o nome do falecido vocalista da banda Linkin Park?",
+  "description": "Bateu até uma tristeza aqui, 'Press F to Pay Respects",
+  "answer": 1,
+  "alternatives": [
+      "Shester Beningtom",
+      "Chester Bennington",
+      "Chester Beninton",
+      "Nenhuma das anteriores"
+  ]
+}
+],
   "theme": {
     "colors": {
       "primary": "#512da8",

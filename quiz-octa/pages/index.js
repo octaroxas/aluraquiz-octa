@@ -55,6 +55,14 @@ export default function Home() {
             Teste seus conhecimentos e descubra se você é um <i>Nerd</i> de verdade!
           </p>
 
+          <p>
+            Tente acertar o máximo de perguntas que puder, beleza?
+          </p>
+
+          <p style={{fontWeight: 'bold', fontSize: 25}}>
+            VAMO LÁ!
+          </p>
+
           <form onSubmit={(infoEvento) => {
             // Previvine que a página execute o refress a cada submissão
             infoEvento.preventDefault();

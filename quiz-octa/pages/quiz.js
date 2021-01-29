@@ -15,7 +15,7 @@ import Button from '../src/components/Button';
 import QuizContainer from '../src/components/QuizContainer';
 import AlternativesForm from '../src/components/AlternativesForm';
 
-function WidgetResult({ results }) {
+function WidgetResult({ results, playerName }) {
 
     return (
         <Widget>
@@ -24,7 +24,7 @@ function WidgetResult({ results }) {
             </Widget.Header>
             <Widget.Content>
                 {/**pesquisar mais sobre o método reduce() */}
-                <p>
+                <p style={{fontFamily:'Lato', fontWeight: 900, fontSize: 20, maxWidth: 300, lineHeight:1}}>
                     Você acertou
                     {' '} {/** adiciona um espaço entre as palavras */}
                         {results.reduce((somatorioAtual, resultadoAtual) => {
@@ -38,7 +38,7 @@ function WidgetResult({ results }) {
                     perguntas!
                 </p>
 
-                <ul>
+                <ul style={{fontFamily:'Lato', fontWeight: 900, fontSize: 15, maxWidth: 300, lineHeight:1.3}}>
                     {results.map((result, index) => (
                         <li key={`result__${result}`}>
                             #{index + 1} Resultado: 
@@ -46,6 +46,25 @@ function WidgetResult({ results }) {
                         </li>
                     ))}
                 </ul>
+            </Widget.Content>
+            <img
+                alt="Descrição"
+                style={{
+                    width: '100%',
+                    height: '220px',
+                    objectFit: 'cover'
+                }}                    
+                src="https://media.giphy.com/media/d68IdpvmAHohx5NMEV/giphy.gif"
+            >
+            </img>
+            <Widget.Content>
+
+
+                <p style={{fontFamily:'Lato', fontWeight: 900, fontSize: 30, maxWidth: 300, lineHeight:1, color: db.theme.colors.primary}}>
+                    {playerName},<br/> Obrigado por jogar! <br/> Até a próxima! <br/> <strong>Yes Baby!</strong>
+                </p>
+
+                
             </Widget.Content>
         </Widget>
     );
@@ -57,14 +76,17 @@ function WidgetLoading() {
             <Widget.Header>
                 Carregando...
             </Widget.Header>
+
             <img
                 alt="Descrição"
                 style={{
                     width: '100%',
-                    height: '150px',
+                    height: '290px',
                     objectFit: 'cover'
                 }}                    
+                //src= "https://gfycat.com/enchantingpresentfrogmouth"
                 src= "https://media.giphy.com/media/3y0oCOkdKKRi0/giphy.gif"
+                //src="https://media.giphy.com/media/d68IdpvmAHohx5NMEV/giphy.gif"
             >
             </img>
             <Widget.Content>
@@ -92,7 +114,7 @@ function QuestionWidget( { question, totalQuestion, questionIndex, onSubmit, add
                 alt="Descrição"
                 style={{
                     width: '100%',
-                    height: '150px',
+                    height: '200px',
                     objectFit: 'cover'
                 }}                    
                 src= {question.image}
@@ -147,7 +169,7 @@ function QuestionWidget( { question, totalQuestion, questionIndex, onSubmit, add
                     <Button type='submit' disabled={!hasAlternativeSelected}>
                         Confirmar
                     </Button>
-                    <p>selectedAlternative: {`${selectedAlternative}`}</p>
+                    {/*<p>selectedAlternative: {`${selectedAlternative}`}</p>*/}
                     {isQuestionSubmited && isCorrect && <p>Você acertou! </p>}
                     {isQuestionSubmited && !isCorrect && <p>Você errou!  </p>}
                 </AlternativesForm>
@@ -164,6 +186,8 @@ const screenStates = {
 
 function QuizPage(){
     //console.log('Perguntas criadas: ', db.questions);
+    const router = useRouter();
+    const playerName = router.query.name;
 
     const [results, setResults] = React.useState([]);
     const [screenState, setScreenState] = React.useState(screenStates.LOADING); {/**Hook */}
@@ -183,6 +207,7 @@ function QuizPage(){
     React.useEffect(() => {
         setTimeout(() => {
             setScreenState(screenStates.QUIZ);
+            console.log(playerName);
         }, 2 * 1000 );
     }, []);
 
@@ -211,7 +236,7 @@ function QuizPage(){
                     /> 
                 )}
 
-                {screenState === screenStates.RESULT && ( <WidgetResult results={results} /> )}
+                {screenState === screenStates.RESULT && ( <WidgetResult results={results} playerName={playerName} /> )}
             </QuizContainer>
         </QuizBackground>
     );
