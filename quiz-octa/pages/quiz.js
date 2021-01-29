@@ -15,6 +15,36 @@ import Button from '../src/components/Button';
 import QuizContainer from '../src/components/QuizContainer';
 import AlternativesForm from '../src/components/AlternativesForm';
 
+const NotificationResultCorrect = styled.div`
+    width:100%;
+    background-color: ${({ theme }) => theme.colors.success};
+    padding-top:20px;
+    padding-bottom: 20px;
+
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin-top: 20px;
+    border-radius:7px;
+    font-weight: bold;
+    font-size: 30px;
+`;
+
+const NotificationResultWrong = styled.div`
+    width:100%;
+    background-color: ${({ theme }) => theme.colors.wrong};
+    padding-top:20px;
+    padding-bottom: 20px;
+
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin-top: 20px;
+    border-radius:7px;
+    font-weight: bold;
+    font-size: 30px;
+`;
+
 function WidgetResult({ results, playerName }) {
 
     return (
@@ -169,9 +199,9 @@ function QuestionWidget( { question, totalQuestion, questionIndex, onSubmit, add
                     <Button type='submit' disabled={!hasAlternativeSelected}>
                         Confirmar
                     </Button>
-                    {/*<p>selectedAlternative: {`${selectedAlternative}`}</p>*/}
-                    {isQuestionSubmited && isCorrect && <p>Você acertou! </p>}
-                    {isQuestionSubmited && !isCorrect && <p>Você errou!  </p>}
+                    {/*<p>selectedAlternative: {`${selectedAlternative}`}</p>*/} 
+                    {isQuestionSubmited && isCorrect && <NotificationResultCorrect><p>Você acertou!</p></NotificationResultCorrect> }
+                    {isQuestionSubmited && !isCorrect && <NotificationResultWrong> <p>Você errou!  </p></NotificationResultWrong>}
                 </AlternativesForm>
             </Widget.Content>
         </Widget>
