@@ -100,24 +100,24 @@ export default function Home() {
             Encontre muitos outros <i>Quizes</i> divertidos como esse para se divertir!
           </p>
 
-          <OutrosQuizes>
-            <a href="https://quiz-cavaleiro-zodiaco.vercel.app/" target="blank">
-              https://quiz-cavaleiro-zodiaco.vercel.app/
-            </a>
-          </OutrosQuizes>
+          {db.external.map((linkExterno, index) => { /* ao realizar um 'map', fazer as iterações, é possível ter acesso ao index de cada item */
+            let link = linkExterno;
+            link = link.replace('https:','')
+            .replace('.vercel.app/', '')
+            .replace('//','')
+            .replace('.','/')
 
-          <OutrosQuizes>
-            <a href="https://aluraquiz-coffee.leonardot07.vercel.app/" target="blank">
-              https://aluraquiz-coffee.leonardot07.vercel.app/
-            </a>
-          </OutrosQuizes>
-
-          <OutrosQuizes>
-            <a href="http://hollow-knigth-quiz.lugusfe.vercel.app/" target="blank">
-              http://hollow-knigth-quiz.lugusfe.vercel.app/
-            </a>
-          </OutrosQuizes>
-          
+            return (
+              <Widget.Topic
+                style={{textDecoration: 'none', fontWeight: 'bold', color: `${db.theme.colors.primary}`}}
+                key={`linkExternal__${index}`}
+                href={linkExterno} 
+                target="blank"
+              >
+                {link}
+              </Widget.Topic>
+            );
+          })} 
 
         </Widget.Content>
       </Widget>

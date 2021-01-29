@@ -79,6 +79,11 @@
   ]
 }
 ],
+"external": [
+  "https://wanda-vision-aluraquiz.marilira.vercel.app/",
+  "https://aluraquiz-coffee.leonardot07.vercel.app/",
+  "https://alura-quiz.lucasketelhut.vercel.app/"
+],
   "theme": {
     "colors": {
       "primary": "#512da8",
