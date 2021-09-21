@@ -1,0 +1,16 @@
+{
+    "questions": [
+        {
+            "image": "https://media.giphy.com/media/J5jiSSrEkV3Kd8iOwb/giphy.gif",
+            "title": "Qual o nome do falecido vocalista da banda Linkin Park?",
+            "description": "Bateu até uma tristeza aqui, 'Press F to Pay Respects",
+            "answer": 1,
+            "alternatives": [
+                "Shester Beningtom",
+                "Chester Bennington",
+                "Chester Beninton",
+                "Nenhuma das anteriores"
+            ]
+        }
+    ]
+}
